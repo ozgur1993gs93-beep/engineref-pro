@@ -1,0 +1,6 @@
+{
+  "name": "EngineRef Pro",
+  "description": "Mühendislik Başvuru Kitaplığı ve Kaynak Teknolojileri Uygulaması",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
