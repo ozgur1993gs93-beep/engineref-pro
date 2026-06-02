@@ -22,6 +22,10 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.R
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.draw.clip
 import com.example.viewmodel.MainViewModel
 
 @Composable
@@ -91,12 +95,13 @@ fun HomeScreen(
                             )
                         }
                         
-                        // Icon indicators
-                        Icon(
-                            imageVector = Icons.Filled.Engineering,
-                            contentDescription = "Industrial Settings logo",
-                            tint = MaterialTheme.colorScheme.secondary,
-                            modifier = Modifier.size(36.dp)
+                        // Custom premium branding logo
+                        Image(
+                            painter = painterResource(id = R.drawable.engine_ref_logo_1780401130358),
+                            contentDescription = "EngineRef Pro App Logo",
+                            modifier = Modifier
+                                .size(48.dp)
+                                .clip(RoundedCornerShape(12.dp))
                         )
                     }
                 }
