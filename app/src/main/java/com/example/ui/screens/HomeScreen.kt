@@ -130,25 +130,34 @@ fun HomeScreen(
 
             // Active AI Assistant Banner Card
             item {
+                val geminiGradient = Brush.horizontalGradient(
+                    colors = listOf(
+                        Color(0xFF0F2027), // Cyber Blue Grey
+                        Color(0xFF1E88E5), // Electric Cobalt Blue
+                        Color(0xFF00ACC1)  // Precision Cyan
+                    )
+                )
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable { onNavigateToTab("chat") }
                         .testTag("dashboard_ai_banner"),
-                    shape = RoundedCornerShape(14.dp),
+                    shape = RoundedCornerShape(16.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = Color(0xFF0C5D41) // Gorgeous Teal active color
-                    )
+                        containerColor = Color.Transparent
+                    ),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
                 ) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(16.dp),
+                            .background(geminiGradient)
+                            .padding(18.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Surface(
-                            modifier = Modifier.size(44.dp),
-                            shape = RoundedCornerShape(10.dp),
+                            modifier = Modifier.size(46.dp),
+                            shape = RoundedCornerShape(12.dp),
                             color = Color.White.copy(alpha = 0.2f)
                         ) {
                             Box(contentAlignment = Alignment.Center) {
@@ -168,7 +177,10 @@ fun HomeScreen(
                                     "DE" -> "aktiv"
                                     else -> "active"
                                 },
-                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                                style = MaterialTheme.typography.titleMedium.copy(
+                                    fontWeight = FontWeight.ExtraBold,
+                                    letterSpacing = 0.5.sp
+                                ),
                                 color = Color.White
                             )
                             Text(
@@ -338,18 +350,26 @@ fun ModuleItemCard(
 ) {
     Card(
         modifier = modifier
-            .height(135.dp)
+            .height(140.dp)
             .clickable { onClick() }
             .testTag("module_card_${title.lowercase().replace(" ", "_")}"),
-        shape = RoundedCornerShape(14.dp),
+        shape = RoundedCornerShape(16.dp),
+        border = androidx.compose.foundation.BorderStroke(
+            1.dp,
+            MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f)
+        ),
         colors = CardDefaults.cardColors(
             containerColor = colorTheme
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 2.dp,
+            pressedElevation = 6.dp
         )
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(12.dp),
+                .padding(14.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Row(
@@ -358,30 +378,30 @@ fun ModuleItemCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Surface(
-                    shape = RoundedCornerShape(8.dp),
-                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f),
-                    modifier = Modifier.size(36.dp)
+                    shape = RoundedCornerShape(10.dp),
+                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f),
+                    modifier = Modifier.size(38.dp),
+                    shadowElevation = 1.dp
                 ) {
                     Box(contentAlignment = Alignment.Center) {
                         Icon(
                             imageVector = icon,
                             contentDescription = title,
                             tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(18.dp)
+                            modifier = Modifier.size(20.dp)
                         )
                     }
                 }
 
                 Surface(
-                    shape = RoundedCornerShape(4.dp),
-                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
+                    shape = RoundedCornerShape(6.dp),
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
                 ) {
                     Text(
                         text = badge,
-                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 9.sp),
-                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold
+                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 9.sp, fontWeight = FontWeight.Bold),
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
+                        color = MaterialTheme.colorScheme.primary
                     )
                 }
             }
@@ -389,16 +409,20 @@ fun ModuleItemCard(
             Column {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold, fontSize = 13.sp),
+                    style = MaterialTheme.typography.titleSmall.copy(
+                        fontWeight = FontWeight.ExtraBold,
+                        fontSize = 14.sp,
+                        letterSpacing = 0.2.sp
+                    ),
                     maxLines = 1,
                     color = MaterialTheme.colorScheme.onSurface
                 )
+                Spacer(modifier = Modifier.height(2.dp))
                 Text(
                     text = subtitle,
-                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.65f),
-                    maxLines = 2,
-                    lineHeight = 14.sp
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp, lineHeight = 14.sp),
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                    maxLines = 2
                 )
             }
         }

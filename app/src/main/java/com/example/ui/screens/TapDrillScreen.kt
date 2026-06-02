@@ -2,6 +2,8 @@ package com.example.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -59,15 +61,24 @@ fun TapDrillScreen(
             .background(MaterialTheme.colorScheme.background)
     ) {
         // Top header banner
+        val headerGradient = androidx.compose.ui.graphics.Brush.horizontalGradient(
+            colors = listOf(
+                MaterialTheme.colorScheme.secondary,
+                Color(0xFF0D5C75) // Sleek industrial dark cyan
+            )
+        )
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.secondary
+                containerColor = Color.Transparent
             ),
-            shape = RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp)
+            shape = RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
             Column(
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier
+                    .background(headerGradient)
+                    .padding(18.dp)
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -76,7 +87,10 @@ fun TapDrillScreen(
                 ) {
                     Text(
                         text = viewModel.getString("tap_drill_title"),
-                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            fontWeight = FontWeight.ExtraBold,
+                            letterSpacing = 0.5.sp
+                        ),
                         color = Color.White
                     )
                     IconButton(
@@ -90,6 +104,7 @@ fun TapDrillScreen(
                         )
                     }
                 }
+                Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = viewModel.getString("tap_drill_sub"),
                     style = MaterialTheme.typography.bodySmall,
@@ -143,7 +158,9 @@ fun TapDrillScreen(
             )
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(6.dp)
             ) {
                 materials.forEach { (tr, foreign) ->

@@ -67,15 +67,24 @@ fun ChatScreen(
             .background(MaterialTheme.colorScheme.background)
     ) {
         // AI ASSISTANT BLUE HEADER BANNER
+        val headerGradient = androidx.compose.ui.graphics.Brush.horizontalGradient(
+            colors = listOf(
+                Color(0xFF1E88E5), // Cobalt Blue
+                Color(0xFF6A1B9A)  // Deep Cyber Purple
+            )
+        )
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primary
+                containerColor = Color.Transparent
             ),
-            shape = RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp)
+            shape = RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
             Column(
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier
+                    .background(headerGradient)
+                    .padding(18.dp)
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),

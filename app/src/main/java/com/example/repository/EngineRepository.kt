@@ -52,8 +52,8 @@ class EngineRepository(private val db: AppDatabase) {
     // Prefill the database on initial start (offline-first sync)
     suspend fun ensureDataInitialized() = withContext(Dispatchers.IO) {
         try {
-            val drills = tapDrillDao.getAllDrills().first()
-        if (drills.isEmpty()) {
+            val drillsCount = tapDrillDao.getDrillsCount()
+        if (drillsCount == 0) {
             val tapDrillList = listOf(
                 TapDrillEntity(
                     size = "M3", pitch = 0.5, drillSize = 2.5,
@@ -144,8 +144,8 @@ class EngineRepository(private val db: AppDatabase) {
             tapDrillDao.insertDrills(tapDrillList)
         }
 
-        val methods = weldingDao.getAllMethods().first()
-        if (methods.isEmpty()) {
+        val methodsCount = weldingDao.getMethodsCount()
+        if (methodsCount == 0) {
             val weldingMethodsList = listOf(
                 WeldingMethodEntity(
                     codeName = "GTAW (TIG)",
@@ -306,8 +306,8 @@ class EngineRepository(private val db: AppDatabase) {
             weldingDao.insertMethods(weldingMethodsList)
         }
 
-        val electrodes = electrodeDao.getAllElectrodes().first()
-        if (electrodes.isEmpty()) {
+        val electrodesCount = electrodeDao.getElectrodesCount()
+        if (electrodesCount == 0) {
             val electrodeList = listOf(
                 ElectrodeEntity(
                     awsCode = "E6013",

@@ -49,15 +49,24 @@ fun CalculatorScreen(
             .background(MaterialTheme.colorScheme.background)
     ) {
         // Banner Header
+        val headerGradient = androidx.compose.ui.graphics.Brush.horizontalGradient(
+            colors = listOf(
+                MaterialTheme.colorScheme.primary,
+                Color(0xFF0F4C81) // Deep Slate Tech Blue
+            )
+        )
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primary
+                containerColor = Color.Transparent
             ),
-            shape = RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp)
+            shape = RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
             Column(
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier
+                    .background(headerGradient)
+                    .padding(18.dp)
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),

@@ -2,21 +2,23 @@ package com.example.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Brand palette
-val PrimaryBlue = Color(0xFF185FA5)
-val SecondaryTeal = Color(0xFF0F6E56)
-val AccentPurple = Color(0xFF534AB7)
+// Brand palette - Engineering Premium
+val PrimaryBlue = Color(0xFF1E88E5)      // Electric Cobalt Blue
+val SecondaryTeal = Color(0xFF00ACC1)    // High-precision Cyan/Teal
+val AccentOrange = Color(0xFFF4511E)     // Industrial Safety Orange
+val GoldAccent = Color(0xFFFFB300)       // Precision Gold Accent
 
 // Light Theme colors
-val LightBackground = Color(0xFFF4F6F9)
+val LightBackground = Color(0xFFF3F5FA)
 val LightSurface = Color(0xFFFFFFFF)
-val LightOnSurface = Color(0xFF1B1D1F)
-val LightPrimaryContainer = Color(0xFFE3EDF7)
-val LightSecondaryContainer = Color(0xFFE2F0EA)
+val LightOnSurface = Color(0xFF161A22)
+val LightPrimaryContainer = Color(0xFFE3F2FD)
+val LightSecondaryContainer = Color(0xFFE0F7FA)
 
 // Dark Theme colors
-val DarkBackground = Color(0xFF111417)
-val DarkSurface = Color(0xFF1B1E22)
-val DarkOnSurface = Color(0xFFE3E6E8)
-val DarkPrimaryContainer = Color(0xFF1A2A3A)
-val DarkSecondaryContainer = Color(0xFF172D26)
+val DarkBackground = Color(0xFF0B0D11)   // Stealth Charcoal
+val DarkSurface = Color(0xFF151922)      // Deep Tech Slate
+val DarkOnSurface = Color(0xFFECEFF4)
+val DarkPrimaryContainer = Color(0xFF192A3E)
+val DarkSecondaryContainer = Color(0xFF122C34)
+

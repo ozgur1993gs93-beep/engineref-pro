@@ -3,6 +3,8 @@ package com.example.ui.screens
 import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -77,15 +79,24 @@ fun WeldingScreen(
             .background(MaterialTheme.colorScheme.background)
     ) {
         // Upper banner matching welding theme
+        val headerGradient = androidx.compose.ui.graphics.Brush.horizontalGradient(
+            colors = listOf(
+                Color(0xFFE64A19), // Vibrant Rust Orange
+                Color(0xFF8D2403)  // Strong Deep Cherry Amber
+            )
+        )
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
-                containerColor = Color(0xFFA24B1B) // Brand Rust Brown Color
+                containerColor = Color.Transparent
             ),
-            shape = RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp)
+            shape = RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
             Column(
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier
+                    .background(headerGradient)
+                    .padding(18.dp)
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -94,7 +105,10 @@ fun WeldingScreen(
                 ) {
                     Text(
                         text = if (activeSubTab == "compare") viewModel.getString("welding_compare") else viewModel.getString("electrode_db"),
-                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            fontWeight = FontWeight.ExtraBold,
+                            letterSpacing = 0.5.sp
+                        ),
                         color = Color.White
                     )
                     IconButton(
@@ -108,6 +122,7 @@ fun WeldingScreen(
                         )
                     }
                 }
+                Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = if (activeSubTab == "compare") viewModel.getString("weld_sub") else viewModel.getString("electrode_sub"),
                     style = MaterialTheme.typography.bodySmall,
@@ -116,7 +131,7 @@ fun WeldingScreen(
 
                 Spacer(modifier = Modifier.height(14.dp))
 
-                // Toggle Sub Tab row
+                 // Toggle Sub Tab row
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -125,7 +140,7 @@ fun WeldingScreen(
                         onClick = { activeSubTab = "compare" },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = if (activeSubTab == "compare") Color.White else Color.White.copy(alpha = 0.15f),
-                            contentColor = if (activeSubTab == "compare") Color(0xFFA24B1B) else Color.White
+                            contentColor = if (activeSubTab == "compare") Color(0xFFE64A19) else Color.White
                         ),
                         modifier = Modifier
                             .weight(1f)
@@ -143,7 +158,7 @@ fun WeldingScreen(
                         onClick = { activeSubTab = "electrodes" },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = if (activeSubTab == "electrodes") Color.White else Color.White.copy(alpha = 0.15f),
-                            contentColor = if (activeSubTab == "electrodes") Color(0xFFA24B1B) else Color.White
+                            contentColor = if (activeSubTab == "electrodes") Color(0xFFE64A19) else Color.White
                         ),
                         modifier = Modifier
                             .weight(1f)
@@ -177,7 +192,12 @@ fun WeldingScreen(
                         color = MaterialTheme.colorScheme.secondary,
                         modifier = Modifier.padding(bottom = 6.dp)
                     )
-                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
                         listOf("All", "Steel", "Stainless", "Aluminum").forEach { mat ->
                             val label = when (mat) {
                                 "Steel" -> viewModel.getString("steel")
@@ -190,7 +210,7 @@ fun WeldingScreen(
                                 onClick = { selectedMaterialFilter = mat },
                                 label = { Text(label, style = MaterialTheme.typography.labelSmall) },
                                 colors = FilterChipDefaults.filterChipColors(
-                                    selectedContainerColor = Color(0xFFA24B1B),
+                                    selectedContainerColor = Color(0xFFE64A19),
                                     selectedLabelColor = Color.White
                                 ),
                                 modifier = Modifier.testTag("weld_mat_chip_$mat")
@@ -320,14 +340,14 @@ fun WeldingScreen(
                                             .weight(1f)
                                             .height(6.dp)
                                             .padding(horizontal = 8.dp),
-                                        color = Color(0xFFA24B1B),
+                                        color = Color(0xFFE64A19),
                                         trackColor = Color.LightGray.copy(alpha = 0.4f),
                                         strokeCap = androidx.compose.ui.graphics.StrokeCap.Round
                                     )
                                     Text(
                                         text = "%${method.efficiencyPercent}",
                                         style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                                        color = Color(0xFFA24B1B)
+                                        color = Color(0xFFE64A19)
                                     )
                                 }
                             }

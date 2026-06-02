@@ -11,6 +11,9 @@ interface TapDrillDao {
     @Query("SELECT * FROM tap_drills WHERE size LIKE '%' || :query || '%' ORDER BY id ASC")
     fun searchDrills(query: String): Flow<List<TapDrillEntity>>
 
+    @Query("SELECT count(*) FROM tap_drills")
+    suspend fun getDrillsCount(): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDrills(drills: List<TapDrillEntity>)
 
@@ -23,6 +26,9 @@ interface WeldingMethodDao {
     @Query("SELECT * FROM welding_methods ORDER BY id ASC")
     fun getAllMethods(): Flow<List<WeldingMethodEntity>>
 
+    @Query("SELECT count(*) FROM welding_methods")
+    suspend fun getMethodsCount(): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMethods(methods: List<WeldingMethodEntity>)
 
@@ -34,6 +40,9 @@ interface WeldingMethodDao {
 interface ElectrodeDao {
     @Query("SELECT * FROM electrodes ORDER BY id ASC")
     fun getAllElectrodes(): Flow<List<ElectrodeEntity>>
+
+    @Query("SELECT count(*) FROM electrodes")
+    suspend fun getElectrodesCount(): Int
 
     @Query("SELECT * FROM electrodes WHERE awsCode LIKE '%' || :query || '%' OR isoCode LIKE '%' || :query || '%'")
     fun searchElectrodes(query: String): Flow<List<ElectrodeEntity>>
